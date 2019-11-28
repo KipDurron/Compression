@@ -36,20 +36,20 @@
             <nav class="navmenu  navmenu-fixed-left navbar-light bg-light">
                 <ul class="navbar-nav mr-auto">
                     <li ><a class="nav-link">
-                        <b>Лекции</b></a></li>
+                        <b>Алгоритмы</b></a></li>
                     <li >
                         <button class="btn btn-link nav-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Раздел 1:Алгоритм нулевого порядка
+                             Нулевого порядка
                         </button>
                     </li>
                     <li><button class="btn btn-link collapsed nav-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Раздел 2:Алгоритм первого порядка
+                        Первого порядка с экстр. аппроксимацией
                     </button></li>
                     <li><button class="btn btn-link collapsed nav-link" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        Раздел 3:
+                        Первого порядка с интер. аппроксимацией
                     </button></li>
                     <li><button class="btn btn-link collapsed nav-link" data-toggle="collapse" data-target="#collapseFore" aria-expanded="false" aria-controls="collapseFore">
-                        Раздел 4:
+                        Лек 4:
                     </button></li>
                 </ul>
             </nav>
@@ -122,7 +122,35 @@
 
         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
             <div class="card-body">
-               content3</div>
+                <h5>Алгоритм первого порядка с интерполирующей процедурой аппроксимации</h5>
+                <p>
+                    1.На вход блока сжатия в момент времени t1 поступает первый отсчет f1.
+                    Значения t1 и f1 запоминаются в буфере памяти.
+                </p>
+                <p>
+                    2.На вход блока сжатия в момент времени t2 поступает второй отсчет f2.
+                    Значения t2 и f2 запоминаются в буфере памяти.
+                </p>
+                <p>
+                    3.На вход блока сжатия в момент времени ti поступает очередной отсчет fi. Значения ti и fi запоминаются в буфете памяти.
+                    По точкам t1,f1 и ti,fi строится интерполирующая прямая:
+                    f*(t) = A0 + A1t,
+                    где коэффициенты A0,A1 рассчитываются по формулам:
+                    A1 = (fi-f1)/(ti-t1) ; A0 = f1 - A1t1.
+                    Далее последовательно для всех отсчетов t2,f2;...;ti-1,fi-1 по формулам ε(t) = f*(t) - f(t) (4.6) или
+                    gT <= ε0 или gT OTH <= δ0 (4.11) рассчитываются значенияточечных критериев ε(t) или δ(t).
+                    Если для всех указанных отсчетов выполняются условие (4.11), наложенное на соответствующий
+                    критерий равномерного приближения, выполнение п.3 повторяется для новых отсчетов. Если же хотя бы для одного отсчетов
+                    условие (4.11) не выполняется, то осуществеляется преход к п.4.
+                </p>
+                <p>
+                    4.Значение fi-1,ti-1 принимаеются за существенный отсчет и запоминются в буфете памяти. Значения коэффициентов A0,A1, подсчитанных
+                    в момент поступления этого отсчета, т.е. в предыдущий момент времени, вместе с величиной t1 заносятся на носитель, предназначенный
+                    для хранения результатов сжатия. Примем (i-1)-й отсчет за первый и, повторяя все вышеприведенные рассуждения для вновь поступающих
+                    данных, осуществим переход к п.3.
+                    По окончанию поступления даннхы необходимо занести на итоговый носитель коэффициенты A0,A1, рассчитанные на основе последнего
+                    отсчета, и значение t1 - время поступления последнего существенного отсчета.
+                </p></div>
         </div>
 
         <div id="collapseFore" class="collapse" aria-labelledby="headingFore" data-parent="#accordion">
