@@ -10,9 +10,9 @@ $(document).ready(function () {
     });
 });
 
-function check_criterion(f_with_star, f){
-    var eps = 1;
-    if (Math.abs((f_with_star - f)) <= eps) {
+function check_criterion2(f_with_star, f){
+    var eps2 = 1;
+    if (Math.abs((f_with_star - f)) <= eps2) {
         return true;
     } else {
         console.log(false);
@@ -46,7 +46,7 @@ function parse_result2(data) {
     var f_temp_2;
     var temp_A1;
     var temp_A0;
-    var temp_f_with_star;
+    var temp_f_with_star = f_with_star;
 
     for(i=2;i<data.length - 1;i++){
         var row1 = data[i];
@@ -56,19 +56,20 @@ function parse_result2(data) {
         temp_t_1 = cells1[0];
         temp_t_2 = cells2[0];
 
-        temp_A1 = excecute_A1(cells1, cells2);
-        temp_A0 = excecute_A0(A1, cells1);
-        temp_f_with_star = excecute_f_with_star( temp_t_2, temp_A1, temp_A0);
+
 
         f_temp_2 = cells2[1];
-        if (!check_criterion(temp_f_with_star, f_temp_2)) {
+        if (!check_criterion2(temp_f_with_star, f_temp_2)) {
             console.log(f_with_star, f_temp_2);
+            temp_A1 = excecute_A1(cells1, cells2);
+            temp_A0 = excecute_A0(temp_A1, cells1);
             A1 = temp_A1;
             A0 = temp_A0;
+            temp_f_with_star = excecute_f_with_star( temp_t_2, A1, A0);
         }
-        return_results[1].push([temp_t_1, excecute_f_with_star(temp_t_1, A1, A0)]);// cжатые данные
-        return_results[1].push([temp_t_2, excecute_f_with_star(temp_t_2, A1, A0)]);
-        return_results[0].push(cells1);//исходные данные
+         // return_results[1].push([temp_t_1, temp_f_with_star]);// cжатые данные
+        return_results[1].push([temp_t_2, temp_f_with_star]);
+         // return_results[0].push(cells1);//исходные данные
         return_results[0].push(cells2);
     }
     return return_results;

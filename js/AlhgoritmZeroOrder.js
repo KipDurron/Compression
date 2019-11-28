@@ -13,7 +13,7 @@ $(document).ready(function () {
 });
 
 function check_criterion(f_with_star, f){
-    var eps = 5;
+    var eps = 1;
     if (Math.abs((f_with_star - f)) <= eps) {
         return true;
     } else {
