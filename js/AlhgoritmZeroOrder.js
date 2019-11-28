@@ -49,19 +49,19 @@ function show_graph(results) {
     // данные для графиков
     var data = parse_result(results.data);
     var all_data = [
-        { data: data[0], label: "True data"},
-        { data: data[1], label: "Compression data"}
+        { data: data[0], label: "Исходные данные"},
+        { data: data[1], label: "Сжатые данные"}
     ];
     var options = {
         axisLabels: {
             show: true
         },
         xaxes: [{
-            axisLabel: 'Time',
+            axisLabel: 'Время',
         }],
         yaxes: [{
             position: 'left',
-            axisLabel: 'Value from reactor (Zero compression)',
+            axisLabel: 'Значение (Алгоритм 0 порядка)',
         }, {
             position: 'right',
             axisLabel: 'bleem'
