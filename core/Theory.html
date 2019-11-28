@@ -29,10 +29,97 @@
     <p class="lead">Данный раздел посвящён описанию алгоритмов сжатия</p>
 </div>
 
+<div id="accordion">
+<div class="row">
+    <div class="col-sm-3" >
+        <div class="navbar" style="padding-left: 20px">
+            <nav class="navmenu  navmenu-fixed-left navbar-light bg-light">
+                <ul class="navbar-nav mr-auto">
+                    <li ><a class="nav-link">
+                        <b>Лекции</b></a></li>
+                    <li >
+                        <button class="btn btn-link nav-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Раздел 1:Алгоритм нулевого порядка
+                        </button>
+                    </li>
+                    <li><button class="btn btn-link collapsed nav-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Раздел 2:Алгоритм первого порядка
+                    </button></li>
+                    <li><button class="btn btn-link collapsed nav-link" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Раздел 3:
+                    </button></li>
+                    <li><button class="btn btn-link collapsed nav-link" data-toggle="collapse" data-target="#collapseFore" aria-expanded="false" aria-controls="collapseFore">
+                        Раздел 4:
+                    </button></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
 
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <div class="col-sm-9" >
+    <div class="card" style="margin-right: 10px">
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="card-body">
+            content1
+        </div>
+    </div>
+
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="card-body">
+                <h5>Алгоритм первого порядка с экстраполирующей процедурой аппроксимации</h5>
+                <p>
+                1.На вход блока сжатия в момент времени t1, поступает первый
+                отсчет f1. Значения t1, и f1, запоминаются в буфере памяти.
+                </p>
+                <p>
+                2. На вход блока сжатия в момент времени t2 поступает второй отсчёт f1 . Значения t2 и f2 запоминаются в буфере памяти. По данным первого и второго отсчетов строится экстраполирующая прямая:
+
+                f^(t) = A0 + A1*t,
+
+                где коэффициент A0 , A1, рассчитываются по следующим формулам:
+
+                A1 = (f2-f1)/(t2-t1), A0 = f1 - A1 * t1.
+                Значения A0 и A1 , сохраняются в буфере памяти. После этого значения А0 ,
+                А1 , t1 заносятся на носитель информации, предназначенный для хранения результатов сжатия.
+                </p>
+                <p>
+                3. На вход блока сжатия в момент времени ti поступает очередной отсчёт fi .По формуле (4.12) проводится расчет f^(ti) , а по формулам (4.6)
+                или (4.9) осуществляется расчет одного из точечных критериев E(ti) или b(ti).
+                Далее проверяется выполнение требований (4.11), наложенных на соответствующий критерий равномерного приближения. Если условие (4.11) удовлетворяется. то повторяется выполнение п. 3 для нового отсчета, в противном случае осуществляется переход к п. 4 .
+                </p>
+                <p>
+                4. Значения fi-1 , ti-1 принимаются на новый существенный отсчет и запоминаются в буфере памяти. Далее по формуле (4.12) строится новая
+                экстраполирующая прямая, а коэффициенты А0,А1 уже рассчитываются
+                по-другому:
+
+                A1 = (fi-fi-1)/(ti-ti-1), A0 = fi-1 - A1 * ti.
+
+                Значения А0 и А1 сохраняются в буфере памяти, после чего значения А0, А1 заносятся на носитель информации, предназначенный для хранения результатов сжатия. Далеу осуществляется переход к по 3 настоящего алгорИтма.
+
+                Выполнение алгоритма заканчивается по окончании поступления данных
+                на вход блока сжатия.</p>
+            </div>
+        </div>
+
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+            <div class="card-body">
+               content3</div>
+        </div>
+
+        <div id="collapseFore" class="collapse" aria-labelledby="headingFore" data-parent="#accordion">
+            <div class="card-body">
+                content4</div>
+        </div>
+    </div>
+</div>
+</div>
+    </div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="../js/bootstrap.js"></script>
+<script src="../js/Accordion.js"></script>
 </body>
 </html>
