@@ -35,6 +35,27 @@
 
 <div class="container text-center">
 
+    <form class="form">
+        <div class="form-group">
+            <label for="mat">Введите мат. ожидание</label>
+            <input name="mat" type="text" class="form-control" id="mat" aria-describedby="mat" placeholder="мат. ожидание">
+        </div>
+        <div class="form-group">
+            <label for="sigma">Введите Сред. квад. отклонение</label>
+            <input name="sigma" type="text" class="form-control" id="sigma" aria-describedby="sigma" placeholder="Сред. квад. отклонение">
+        </div>
+        <div class="form-group">
+            <label for="amount">Введите кол. выборки</label>
+            <input name="amount" type="text" class="form-control" id="amount" aria-describedby="amount" placeholder="Кол. выборки">
+        </div>
+        <div class="form-group">
+            <button type="button" id="submit-normal-seq" class="btn btn-primary">Построить графики</button>
+        </div>
+    </form>
+
+    <p class="lead">Либо укажите файл с готовой последовательностью</p>
+
+    <br>
     <form class="form-inline">
         <div class="form-group">
             <label for="files">Загрузить CSV файл:</label>
@@ -68,5 +89,7 @@
 <script src="../js/PapaParse-5.0.2/papaparse.min.js"></script>
 <script src="../js/AlhgoritmZeroOrder.js"></script>
 <script src="../js/AlhgoritmOneOrder.js"></script>
+<script src="../js/create_graph_with_normal_seq.js"></script>
+<script src="../js/sim-0.26.js"></script>
 </body>
 </html>
