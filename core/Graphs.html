@@ -20,7 +20,7 @@
                 <a class="nav-link" href="Theory.html">Теория</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="#">Реализация</a>
+                <a class="nav-link" href="#">Графики</a>
             </li>
             </ul>
     </div>
@@ -28,13 +28,22 @@
 
 
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h1 class="display-4">Реализация алгоритмов сжатия</h1>
-    <p class="lead">Данный раздел содержит функционал по построению графиков на основе реализации алгоритмов сжатия</p>
+    <h1 class="display-4">Построение графиков</h1>
+    <p class="lead">Данный раздел посвящён демонстрации алгоритмов сжатия в виде графиков</p>
+    <p class="lead">В данном разделе можно построить графики при помощи готового файла, либо сгенерируя свою последовательность,
+        используя мат ожидание и среднеквадратическое отклонение
+    </p>
 </div>
 
 
 <div class="container text-center">
 
+    <div class="row" style="margin-top: 20px">
+        <div class="col-sm">
+            <div class="card text-white bg-secondary mb-3" style="max-width: 30rem;">
+                <div class="card-body">
+
+        <p class="lead">Сгенерировать данные</p>
     <form class="form">
         <div class="form-group">
             <label for="mat">Введите мат. ожидание</label>
@@ -51,9 +60,14 @@
         <div class="form-group">
             <button type="button" id="submit-normal-seq" class="btn btn-primary">Построить графики</button>
         </div>
-    </form>
-
-    <p class="lead">Либо укажите файл с готовой последовательностью</p>
+             </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="card text-white bg-secondary mb-3" style="max-width: 34rem;">
+                <div class="card-body">
+    <p class="lead">Укажите файл с готовой последовательностью</p>
 
     <br>
     <form class="form-inline">
@@ -62,15 +76,21 @@
             <input type="file" id="files"  class="form-control" accept=".csv" required />
         </div>
         <div class="form-group">
-            <button type="submit" id="submit-file" class="btn btn-primary">Загрузить файл</button>
+            <button type="submit" id="submit-file" class="btn btn-primary">Построить графики</button>
         </div>
     </form>
-    <div class="row" style="margin-top: 20px">
-        <div class="col-sm">
-            <div id="zero_graph" style="width:600px;height:300px;"></div>
+                </div>
+            </div>
         </div>
-        <div class="col-sm">
-            <div id="one_graph" style="width:600px;height:300px;"></div>
+    </div>
+
+<!--    Выввод графов-->
+    <div class="row" style="margin-top: 20px">
+        <div class="col-sm-6">
+            <div id="zero_graph" style="width:500px;height:300px;"></div>
+        </div>
+        <div class="col-sm-6">
+            <div id="one_graph" style="width:500px;height:300px;"></div>
         </div>
     </div>
 
@@ -82,9 +102,7 @@
 <script src="../js/jquery-3.4.1.min.js"></script>
 <script src="../js/bootstrap.js"></script>
 <!-- Latest compiled JavaScript -->
-<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>-->
 <script type="text/javascript" src="../js/jquery.flot.min.js"></script>
-<!--<script type="text/javascript" src="http://static.pureexample.com/js/flot/jquery.flot.animator.min.js"></script>-->
 <script src="../js/jquery.flot.axislabels.js"></script>
 <script src="../js/PapaParse-5.0.2/papaparse.min.js"></script>
 <script src="../js/AlhgoritmZeroOrder.js"></script>
