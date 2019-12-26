@@ -91,14 +91,33 @@ function getGaussianRandom(mean, standardDeviation) {
         while (q >= 1.0 || q === 0); p = Math.sqrt(-2.0 * Math.log(q) / q);
         return mean + standardDeviation * u * p; }; }
 
+function isNumber(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
 $(document).ready(function () {
     $('#submit-normal-seq').on("click",function(e){
 
-        var mat =  $('#mat').val();
-        var sigma =  $('#sigma').val();
+        var mat =  $('#mat').val().replace(/,/, '.');
+        var sigma =  $('#sigma').val().replace(/,/, '.');
         var amount =  $('#amount').val();
         var count = 0;
-        var normal_array = [];
+
+        if(!mat || !sigma || !amount){
+            alert("Введите все поля формы");
+            return;
+        }
+
+        if(!isNumber(mat) || !isNumber(sigma) || !isNumber(amount)){
+            alert("Сред.квад.отклонение, мат. ожидание, количество выборки должны быть числами");
+            return;
+        }
+        // if(Number.isInteger(amount) && parseInt(amount) > 0){
+        //     alert("Количество выборки должны быть натуральным числом");
+        //     return;
+        // }
+
+            var normal_array = [];
 
         while (count < amount) {
             count++;
@@ -107,7 +126,7 @@ $(document).ready(function () {
             //
             //
             // var normal_val=  stream2.normal(mat, sigma);
-            var normal_val= normal(mat, sigma, amount)
+            var normal_val= normal(mat, sigma, amount);
 
             normal_array.push([count, normal_val]);
         }
@@ -130,9 +149,58 @@ $(document).ready(function () {
         return_results[0] = normal_array;
         return_results[1] = compress_array;
         alert( normal_array);
-        show_graph_with_mu_zero(return_results)
+        show_graph_with_mu_zero(return_results);
+        create_one_comp_alg(mat, sigma, amount,normal_array);
     });
 });
+
+function create_one_comp_alg(mat, sigma, amount, normal_array) {
+    var count = 0;
+    var compress_array = [];
+    var f_with_star = normal_array[1];
+    var t_temp = normal_array[0];
+    var return_results = [[], []];//первый массив исходные дапнные, второй сжатые
+    compress_array.push([t_temp, f_with_star]);
+    var f_temp;
+    for(i=1;i<normal_array.length;i++){
+        var row = normal_array[i];
+        t_temp = row[0];
+        f_temp = row[1];
+        if (!check_criterion_with_del(f_with_star, f_temp, sigma)) {
+            console.log(f_with_star, f_temp);
+            f_with_star = f_temp;
+        }
+        compress_array.push([t_temp, f_with_star]);
+    }
+    return_results[0] = normal_array;
+    return_results[1] = compress_array;
+    show_graph_with_mu_one(return_results)
+}
+
+function show_graph_with_mu_one(results) {
+    // данные для графиков
+    var data = results;
+    var all_data = [
+        { data: data[0], label: "Исходные данные"},
+        { data: data[1], label: "Сжатые данные"}
+    ];
+    var options = {
+        axisLabels: {
+            show: true
+        },
+        xaxes: [{
+            axisLabel: 'Время',
+        }],
+        yaxes: [{
+            position: 'left',
+            axisLabel: 'Значение (Алгоритм 1 порядка)',
+        }, {
+            position: 'right',
+            axisLabel: 'bleem'
+        }]
+    };
+    jQuery.plot($("#one_graph"), all_data, options);
+}
 
 function show_graph_with_mu_zero(results) {
     // данные для графиков
