@@ -61,7 +61,7 @@ function show_graph(results) {
         }],
         yaxes: [{
             position: 'left',
-            axisLabel: 'Значение (Алгоритм 0 порядка)',
+            axisLabel: 'Алгоритм 1 порядка экстраполирующий',
         }, {
             position: 'right',
             axisLabel: 'bleem'

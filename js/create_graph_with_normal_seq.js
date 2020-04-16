@@ -174,7 +174,33 @@ function create_one_comp_alg(mat, sigma, amount, normal_array) {
     }
     return_results[0] = normal_array;
     return_results[1] = compress_array;
-    show_graph_with_mu_one(return_results)
+    show_graph_with_mu_one(return_results);
+    show_graph_with_mu_one_inter(return_results);
+}
+
+function show_graph_with_mu_one_inter(results) {
+    // данные для графиков
+    var data = results;
+    var all_data = [
+        { data: data[0], label: "Исходные данные"},
+        { data: data[1], label: "Сжатые данные"}
+    ];
+    var options = {
+        axisLabels: {
+            show: true
+        },
+        xaxes: [{
+            axisLabel: 'Время',
+        }],
+        yaxes: [{
+            position: 'left',
+            axisLabel: 'Алгоритм 1 порядка интерполирующий',
+        }, {
+            position: 'right',
+            axisLabel: 'bleem'
+        }]
+    };
+    jQuery.plot($("#stub_graph"), all_data, options);
 }
 
 function show_graph_with_mu_one(results) {
@@ -193,7 +219,7 @@ function show_graph_with_mu_one(results) {
         }],
         yaxes: [{
             position: 'left',
-            axisLabel: 'Значение (Алгоритм 1 порядка)',
+            axisLabel: 'Алгоритм 1 порядка экстраполирующий',
         }, {
             position: 'right',
             axisLabel: 'bleem'
@@ -218,7 +244,7 @@ function show_graph_with_mu_zero(results) {
         }],
         yaxes: [{
             position: 'left',
-            axisLabel: 'Значение (Алгоритм 0 порядка)',
+            axisLabel: 'Алгоритм 0 порядка',
         }, {
             position: 'right',
             axisLabel: 'bleem'

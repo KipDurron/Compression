@@ -4,7 +4,7 @@ $(document).ready(function () {
         $('#files').parse({
             config: {
                 delimiter: "auto",
-                complete: show_graph_2,
+                complete: show_graph_3,
             }
         });
     });
@@ -75,7 +75,7 @@ function parse_result2(data) {
     return return_results;
 }
 
-function show_graph_2(results) {
+function show_graph_3(results) {
     // данные для графиков
     var data = parse_result2(results.data);
     var all_data = [
@@ -91,13 +91,13 @@ function show_graph_2(results) {
         }],
         yaxes: [{
             position: 'left',
-            axisLabel: 'Алгоритм 0 порядка',
+            axisLabel: 'Алгоритм 1 порядка экстраполирующий',
         }, {
             position: 'right',
             axisLabel: 'bleem'
         }]
     };
-    $.plot($("#one_graph"), all_data, options);
+    $.plot($("#stub_graph"), all_data, options);
 }
 
 
