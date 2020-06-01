@@ -116,8 +116,9 @@ function formed_table_by_results(result_0_order, result_1_order) {
 
 $(document).ready(function () {
     function exportTableToCSV($table, filename) {
-        var $rows = $table.find('tr:has(td)'),
+        var universalBOM = "\uFEFF";
 
+        var $rows = $table.find('tr:has(td)'),
             // Temporary delimiter characters unlikely to be typed by keyboard
             // This is to avoid accidentally splitting the actual contents
             tmpColDelim = String.fromCharCode(11), // vertical tab character
@@ -147,7 +148,7 @@ $(document).ready(function () {
         // Deliberate 'false', see comment below
         if (false && window.navigator.msSaveBlob) {
 
-            var blob = new Blob([decodeURIComponent(csv)], {
+            var blob = new Blob([decodeURIComponent(universalBOM + csv)], {
                 type: 'text/csv;charset=utf-8;'
             });
 
@@ -160,7 +161,7 @@ $(document).ready(function () {
 
         } else if (window.Blob && window.URL) {
             // HTML5 Blob
-            var blob = new Blob([csv], {
+            var blob = new Blob([universalBOM + csv], {
                 type: 'text/csv;charset=utf-8'
             });
             var csvUrl = URL.createObjectURL(blob);
@@ -172,7 +173,7 @@ $(document).ready(function () {
                 });
         } else {
             // Data URI
-            var csvData = 'data:application/csv;charset=utf-8' + encodeURIComponent(csv);
+            var csvData = 'data:application/csv;charset=utf-8' + encodeURIComponent(universalBOM + csv);
 
             $(this)
                 .attr({
