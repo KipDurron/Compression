@@ -186,19 +186,24 @@ $(document).ready(function () {
     $('#download_res').on("click",function(e){
        var result_0_order = JSON.parse($("#saved_res_0_order").attr("data-res"));
        var result_1_order = JSON.parse($("#saved_res_1_order").attr("data-res"));
-       var table_str = formed_table_by_results(result_0_order, result_1_order);
-        $( "#dvData" ).append(table_str);
        var args = [$('#dvData>table'), 'export.csv'];
        exportTableToCSV.apply(this, args);
     });
 });
 
+
+function save_table_to_Html(result_0_order, result_1_order) {
+    var table_str = formed_table_by_results(result_0_order, result_1_order);
+    $( "#dvData" ).empty();
+    $( "#dvData" ).append(table_str);
+}
 function show_graphs(results) {
     var result_0_order = parse_result_0_order(results.data);
     var result_1_order = parse_result_1_order(results.data);
     show_graph_0_order(result_0_order);
     show_graph_1_order(result_1_order);
-    save_result_to_html(result_0_order, result_1_order)
+    save_result_to_html(result_0_order, result_1_order);
+    save_table_to_Html(result_0_order, result_1_order);
 }
 
 function show_graph_0_order(results) {

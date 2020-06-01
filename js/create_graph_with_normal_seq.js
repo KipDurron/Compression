@@ -137,6 +137,7 @@ $(document).ready(function () {
         show_graph_1_order(result_1_order);
 
         save_result_to_html(result_0_order, result_1_order);
+        save_table_to_Html(result_0_order, result_1_order);
     });
 });
 
