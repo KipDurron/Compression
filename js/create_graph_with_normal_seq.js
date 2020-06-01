@@ -130,35 +130,65 @@ $(document).ready(function () {
 
             normal_array.push([count, normal_val]);
         }
-        var compress_array = [];
-        var f_with_star = normal_array[1];
-        var t_temp = normal_array[0];
-        var return_results = [[], []];//первый массив исходные дапнные, второй сжатые
-        compress_array.push([t_temp, f_with_star]);
-        var f_temp;
-        for(i=1;i<normal_array.length;i++){
-            var row = normal_array[i];
-            t_temp = row[0];
-            f_temp = row[1];
-            if (!check_criterion_with_del(f_with_star, f_temp, sigma)) {
-                console.log(f_with_star, f_temp);
-                f_with_star = f_temp;
-            }
-            compress_array.push([t_temp, f_with_star]);
-        }
-        return_results[0] = normal_array;
-        return_results[1] = compress_array;
-        alert( normal_array);
-        show_graph_with_mu_zero(return_results);
-        create_one_comp_alg(mat, sigma, amount,normal_array);
+        var result_0_order = create_0_order_alg(normal_array, sigma);
+        var result_1_order = create_1_order_alg(normal_array);
+        show_graph_0_order(result_0_order);
+        // create_one_comp_alg(mat, sigma, amount,normal_array);
+        show_graph_1_order(result_1_order);
+
+        save_result_to_html(result_0_order, result_1_order);
     });
 });
 
-function create_one_comp_alg(mat, sigma, amount, normal_array) {
-    var count = 0;
+//data = normal_array
+function create_1_order_alg(normal_array) {
+    var return_results = [[], []];//первый массив исходные дапнные, второй сжатые
+    var A1 = excecute_A1(normal_array[0], normal_array[1]);
+    var A0 = excecute_A0(A1, normal_array[0]);
+    var f_with_star = normal_array[0][1];
+    var temp_t_1 = normal_array[0][0];
+    var temp_t_2 = normal_array[1][0];
+    return_results[1].push([temp_t_1, excecute_f_with_star(temp_t_1, A1, A0)]);
+    return_results[1].push([temp_t_2, excecute_f_with_star(temp_t_2, A1, A0)]);
+    return_results[0].push(normal_array[0]);
+    return_results[0].push(normal_array[1]);
+    var f_temp_2;
+    var temp_A1;
+    var temp_A0;
+    var temp_f_with_star = f_with_star;
+
+    for(var i=2;i<normal_array.length - 1;i++){
+        var row1 = normal_array[i];
+        var row2 = normal_array[i+1];
+        var cells1 = row1;
+        var cells2 = row2;
+        temp_t_1 = cells1[0];
+        temp_t_2 = cells2[0];
+
+
+
+        f_temp_2 = cells2[1];
+        if (!check_criterion_with_del(temp_f_with_star, f_temp_2)) {
+            // console.log(f_with_star, f_temp_2);
+            temp_A1 = excecute_A1(cells1, cells2);
+            temp_A0 = excecute_A0(temp_A1, cells1);
+            A1 = temp_A1;
+            A0 = temp_A0;
+            temp_f_with_star = excecute_f_with_star( temp_t_2, A1, A0);
+        }
+        // return_results[1].push([temp_t_1, temp_f_with_star]);// cжатые данные
+        return_results[1].push([temp_t_2, temp_f_with_star]);
+        // return_results[0].push(cells1);//исходные данные
+        return_results[0].push(cells2);
+    }
+    return return_results;
+}
+
+
+function create_0_order_alg(normal_array, sigma) {
     var compress_array = [];
-    var f_with_star = normal_array[1];
-    var t_temp = normal_array[0];
+    var f_with_star = normal_array[1][1];
+    var t_temp = normal_array[0][0];
     var return_results = [[], []];//первый массив исходные дапнные, второй сжатые
     compress_array.push([t_temp, f_with_star]);
     var f_temp;
@@ -166,99 +196,23 @@ function create_one_comp_alg(mat, sigma, amount, normal_array) {
         var row = normal_array[i];
         t_temp = row[0];
         f_temp = row[1];
-        if (!check_criterion_with_del(f_with_star, f_temp, sigma)) {
-            console.log(f_with_star, f_temp);
+        if (!check_criterion_with_del(f_with_star, f_temp)) {
+            // console.log(f_with_star, f_temp);
             f_with_star = f_temp;
         }
         compress_array.push([t_temp, f_with_star]);
     }
     return_results[0] = normal_array;
     return_results[1] = compress_array;
-    show_graph_with_mu_one(return_results);
-    show_graph_with_mu_one_inter(return_results);
+    return return_results;
 }
 
-function show_graph_with_mu_one_inter(results) {
-    // данные для графиков
-    var data = results;
-    var all_data = [
-        { data: data[0], label: "Исходные данные"},
-        { data: data[1], label: "Сжатые данные"}
-    ];
-    var options = {
-        axisLabels: {
-            show: true
-        },
-        xaxes: [{
-            axisLabel: 'Время',
-        }],
-        yaxes: [{
-            position: 'left',
-            axisLabel: 'Алгоритм 1 порядка интерполирующий',
-        }, {
-            position: 'right',
-            axisLabel: 'bleem'
-        }]
-    };
-    jQuery.plot($("#stub_graph"), all_data, options);
-}
-
-function show_graph_with_mu_one(results) {
-    // данные для графиков
-    var data = results;
-    var all_data = [
-        { data: data[0], label: "Исходные данные"},
-        { data: data[1], label: "Сжатые данные"}
-    ];
-    var options = {
-        axisLabels: {
-            show: true
-        },
-        xaxes: [{
-            axisLabel: 'Время',
-        }],
-        yaxes: [{
-            position: 'left',
-            axisLabel: 'Алгоритм 1 порядка экстраполирующий',
-        }, {
-            position: 'right',
-            axisLabel: 'bleem'
-        }]
-    };
-    jQuery.plot($("#one_graph"), all_data, options);
-}
-
-function show_graph_with_mu_zero(results) {
-    // данные для графиков
-    var data = results;
-    var all_data = [
-        { data: data[0], label: "Исходные данные"},
-        { data: data[1], label: "Сжатые данные"}
-    ];
-    var options = {
-        axisLabels: {
-            show: true
-        },
-        xaxes: [{
-            axisLabel: 'Время',
-        }],
-        yaxes: [{
-            position: 'left',
-            axisLabel: 'Алгоритм 0 порядка',
-        }, {
-            position: 'right',
-            axisLabel: 'bleem'
-        }]
-    };
-    jQuery.plot($("#zero_graph"), all_data, options);
-}
-
-function check_criterion_with_del(f_with_star, f,sigma_temp){
+function check_criterion_with_del(f_with_star, f){
     var eps = 1;
     if (Math.abs((f_with_star - f)/f) <= eps) {
         return true;
     } else {
-        console.log(false);
+        // console.log(false);
         return false;
     }
 }

@@ -83,22 +83,29 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-2">
+<!--            <button type="button" id="download_res" class="btn btn-primary" disabled>Скачать результат</button>-->
+            <a href="#" id="download_res" class="btn btn-primary" disabled>Скачать результат</a>
+        </div>
+    </div>
+
 
 <!--    Выввод графов-->
     <div class="row" style="margin-top: 20px">
-        <div class="col-sm-6">
+
+        <div class="col-sm-6" id="conteiner_zero_graph">
             <div id="zero_graph" style="width:500px;height:300px;"></div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-6" id="conteiner_one_graph">
             <div id="one_graph" style="width:500px;height:300px;"></div>
         </div>
     </div>
-    <div class="row" style="margin-top: 30px">
-        <div class="col-sm-6">
-            <div id="stub_graph" style="width:500px;height:300px;"></div>
-        </div>
-    </div>
 
+    <input type="text" id="saved_res_0_order" style="display: none;" data-res=""/>
+    <input type="text" id="saved_res_1_order" style="display: none;" data-res=""/>
+    <div id="dvData">
+    </div>
 </div>
 
 
@@ -110,9 +117,9 @@
 <script type="text/javascript" src="../js/jquery.flot.min.js"></script>
 <script src="../js/jquery.flot.axislabels.js"></script>
 <script src="../js/PapaParse-5.0.2/papaparse.min.js"></script>
-<script src="../js/AlhgoritmZeroOrder.js"></script>
-<script src="../js/AlhgoritmOneOrder.js"></script>
-<script src="../js/StubAlhgoritmOneOrder.js"></script>
+<script src="../js/graph_for_download_file.js"></script>
+
+
 <script src="../js/create_graph_with_normal_seq.js"></script>
 <script src="../js/sim-0.26.js"></script>
 </body>
