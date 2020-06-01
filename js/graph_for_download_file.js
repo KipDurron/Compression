@@ -59,7 +59,7 @@ function get_koef_compress(compressed_data, first_data) {
     // alert(compressed_uniq_data.length);
     // alert(first_data.length / compressed_uniq_data.length);
     // console.log(compressed_uniq_data);
-    return first_data.length / compressed_uniq_data.length
+    return (first_data.length).toFixed(2) / (compressed_uniq_data.length).toFixed(2)
 
 }
 
@@ -69,9 +69,9 @@ function formed_row_for_table(result) {
     var compressed_data = data[1];
     var koef_compress = get_koef_compress(compressed_data, first_data);
     var uniq_compressed_data = get_compressed_uniq_data(compressed_data);
-    var return_str = " <tr>\n" +
-        "        <td>Коэффициент сжатия</td>\n" +
-        "        <td>" + koef_compress + "</td>\n" +
+    var return_str = " <tr>" +
+        "        <td>Коэффициент сжатия</td>" +
+        "        <td>" + parseFloat(koef_compress).toFixed(5)  + "</td>" +
         "        </tr>" +
         "<tr>\n" +
         "        <td>Исходные данные:</td>\n" +
@@ -101,7 +101,7 @@ function formed_row_for_table(result) {
 }
 
 function formed_table_by_results(result_0_order, result_1_order) {
-    var str_return = "<table>";
+    var str_return = "<table id='table2excel'>";
     str_return += "<tr>\n" +
         "        <td>Алгоритм 0 порядка</td>\n" +
         "        </tr>";
@@ -184,11 +184,19 @@ $(document).ready(function () {
         }
     }
 
-    $('#download_res').on("click",function(e){
-       var result_0_order = JSON.parse($("#saved_res_0_order").attr("data-res"));
-       var result_1_order = JSON.parse($("#saved_res_1_order").attr("data-res"));
-       var args = [$('#dvData>table'), 'export.csv'];
-       exportTableToCSV.apply(this, args);
+    $('#download_res').click(function(e){
+       // var result_0_order = JSON.parse($("#saved_res_0_order").attr("data-res"));
+       // var result_1_order = JSON.parse($("#saved_res_1_order").attr("data-res"));
+       // var args = [$('#dvData>table'), 'export.csv'];
+       // exportTableToCSV.apply(this, args);
+        $("#table2excel").table2excel({
+            // exclude CSS class
+            exclude: ".noExl",
+            name: "Worksheet Name",
+            filename: "export_result.xls", //do not include extension
+            fileext: "xls",
+
+        });
     });
 });
 
