@@ -74,7 +74,8 @@ function formed_row_for_table(result) {
         "        <td>" + parseFloat(koef_compress).toFixed(5)  + "</td>" +
         "        </tr>" +
         "<tr>\n" +
-        "        <td>Исходные данные:</td>\n" +
+        "        <td>Исходные данные:</td>" +
+        "          <td></td>\n" +
         "        </tr><tr>\n" +
         "        <td>Время</td>\n" +
         "        <td>Значение</td>\n" +
@@ -86,7 +87,8 @@ function formed_row_for_table(result) {
             "        </tr>"
     }
     return_str += "<tr>\n" +
-        "        <td>Сжатые данные:</td>\n" +
+        "        <td>Сжатые данные:</td>" +
+        "        <td></td>\n" +
         "        </tr><tr>\n" +
         "        <td>Время</td>\n" +
         "        <td>Значение</td>\n" +
@@ -101,20 +103,26 @@ function formed_row_for_table(result) {
 }
 
 function formed_table_by_results(result_0_order, result_1_order) {
-    var str_return = "<table id='table2excel'>";
+    var str_return = "<table id='table2excel' class=\"table table-striped\">";
     str_return += "<tr>\n" +
-        "        <th>Алгоритмы сжатия</th>\n" +
+        "        <th>Алгоритмы сжатия</th>" +
+        "<th></th>\n" +
         "        </tr>" +
         "       <tr>\n" +
         "        <td>Eps</td>\n" +
         "        <td>1</td>" +
         "       </tr>" +
         "       <tr>\n" +
-        "        <td>Алгоритм 0 порядка</td>\n" +
+        "        <th>Алгоритм 0 порядка</th>" +
+        "       <td></td>\n" +
         "        </tr>";
     str_return += formed_row_for_table(result_0_order);
     str_return += "<tr>\n" +
-        "        <td>Алгоритм 1 порядка</td>\n" +
+        "        <td>################################</td>" +
+        "       <td>################################</td>\n" +
+        "        </tr><tr>\n" +
+        "        <th>Алгоритм 1 порядка</th>" +
+        "       <td></td>\n" +
         "        </tr>";
     str_return += formed_row_for_table(result_1_order);
     return str_return
