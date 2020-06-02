@@ -103,6 +103,13 @@ function formed_row_for_table(result) {
 function formed_table_by_results(result_0_order, result_1_order) {
     var str_return = "<table id='table2excel'>";
     str_return += "<tr>\n" +
+        "        <th>Алгоритмы сжатия</th>\n" +
+        "        </tr>" +
+        "       <tr>\n" +
+        "        <td>Eps</td>\n" +
+        "        <td>1</td>" +
+        "       </tr>" +
+        "       <tr>\n" +
         "        <td>Алгоритм 0 порядка</td>\n" +
         "        </tr>";
     str_return += formed_row_for_table(result_0_order);
@@ -343,7 +350,8 @@ function parse_result_1_order(data) {
         // return_results[1].push([temp_t_1, temp_f_with_star]);// cжатые данные
         return_results[1].push([temp_t_2, temp_f_with_star]);
         // return_results[0].push(cells1);//исходные данные
-        return_results[0].push(cells2);
+        return_results[0].push(cells1);
     }
+    return_results[0].push(cells2);
     return return_results;
 }

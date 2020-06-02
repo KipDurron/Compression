@@ -180,8 +180,9 @@ function create_1_order_alg(normal_array) {
         // return_results[1].push([temp_t_1, temp_f_with_star]);// cжатые данные
         return_results[1].push([temp_t_2, temp_f_with_star]);
         // return_results[0].push(cells1);//исходные данные
-        return_results[0].push(cells2);
+        return_results[0].push(cells1);
     }
+    return_results[0].push(cells2);
     return return_results;
 }
 
