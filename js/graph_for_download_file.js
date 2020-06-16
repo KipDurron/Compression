@@ -13,15 +13,15 @@ $(document).ready(function () {
     });
 });
 
-function check_criterion_0_order(f_with_star, f){
-    var eps = 1;
-    if (Math.abs((f_with_star - f)) <= eps) {
-        return true;
-    } else {
-        console.log(false);
-        return false;
-    }
-}
+// function check_criterion_0_order(f_with_star, f){
+//     var eps = 1;
+//     if (Math.abs((f_with_star - f)) <= eps) {
+//         return true;
+//     } else {
+//         console.log(false);
+//         return false;
+//     }
+// }
 
 function parse_result_0_order(data) {
     var f_with_star = data[0].join(",").split(";")[1];
@@ -35,7 +35,7 @@ function parse_result_0_order(data) {
         var cells = row.join(",").split(";");
         t_temp = cells[0];
         f_temp = cells[1];
-        if (!check_criterion_0_order(f_with_star, f_temp)) {
+        if (!check_criterion_with_del(f_with_star, f_temp)) {
            // console.log(f_with_star, f_temp);
             f_with_star = f_temp;
         }
@@ -46,19 +46,17 @@ function parse_result_0_order(data) {
     return return_results;
 }
 
-function save_result_to_html(result_0_order, result_1_order) {
+function save_result_to_html(result_0_order, result_1_order, eps0) {
     //показываем кнопку загрузки результатов постоения графов
     $('#download_res').prop('disabled', false);
     $("#saved_res_0_order").attr("data-res", JSON.stringify(result_0_order));
     $("#saved_res_1_order").attr("data-res", JSON.stringify(result_1_order));
+    // $("#saved_res_eps0").attr("data-res", eps0);
+    $("#eps0").val(eps0);
 }
 
 function get_koef_compress(compressed_data, first_data) {
     var compressed_uniq_data = get_compressed_uniq_data(compressed_data);
-    // alert(first_data.length);
-    // alert(compressed_uniq_data.length);
-    // alert(first_data.length / compressed_uniq_data.length);
-    // console.log(compressed_uniq_data);
     return (first_data.length).toFixed(2) / (compressed_uniq_data.length).toFixed(2)
 
 }
@@ -103,14 +101,19 @@ function formed_row_for_table(result) {
 }
 
 function formed_table_by_results(result_0_order, result_1_order) {
+    // var eps0 = Number($("#saved_res_eps0").attr("data-res"));
+    var eps0 = Number($("#eps0").val());
+    if (isNaN(eps0)) {
+        eps0 = 0.5;
+    }
     var str_return = "<table id='table2excel' class=\"table table-striped\">";
     str_return += "<tr>\n" +
         "        <th>Алгоритмы сжатия</th>" +
         "<th></th>\n" +
         "        </tr>" +
         "       <tr>\n" +
-        "        <td>Eps</td>\n" +
-        "        <td>1</td>" +
+        "        <td>Eps0</td>\n" +
+        "        <td>" + eps0 + "</td>" +
         "       </tr>" +
         "       <tr>\n" +
         "        <th>Алгоритм 0 порядка</th>" +
@@ -128,82 +131,21 @@ function formed_table_by_results(result_0_order, result_1_order) {
     return str_return
 }
 
+function getEps0() {
+    var eps0 =  $('#eps0').val().replace(/,/, '.');
+    if(!eps0){
+        alert("Введите Eps0");
+        return null;
+    }
+    if(!isNumber(eps0)){
+        alert("Eps0 должно быть числом");
+        return null;
+    }
+    return eps0;
+}
 
 $(document).ready(function () {
-    function exportTableToCSV($table, filename) {
-        var universalBOM = "\uFEFF";
-
-        var $rows = $table.find('tr:has(td)'),
-            // Temporary delimiter characters unlikely to be typed by keyboard
-            // This is to avoid accidentally splitting the actual contents
-            tmpColDelim = String.fromCharCode(11), // vertical tab character
-            tmpRowDelim = String.fromCharCode(0), // null character
-
-            // actual delimiter characters for CSV format
-            colDelim = '","',
-            rowDelim = '"\r\n"',
-
-            // Grab text from table into CSV formatted string
-            csv = '"' + $rows.map(function(i, row) {
-                var $row = $(row),
-                    $cols = $row.find('td');
-
-                return $cols.map(function(j, col) {
-                    var $col = $(col),
-                        text = $col.text();
-
-                    return text.replace(/"/g, '""'); // escape double quotes
-
-                }).get().join(tmpColDelim);
-
-            }).get().join(tmpRowDelim)
-                .split(tmpRowDelim).join(rowDelim)
-                .split(tmpColDelim).join(colDelim) + '"';
-
-        // Deliberate 'false', see comment below
-        if (false && window.navigator.msSaveBlob) {
-
-            var blob = new Blob([decodeURIComponent(universalBOM + csv)], {
-                type: 'text/csv;charset=utf-8;'
-            });
-
-            // Crashes in IE 10, IE 11 and Microsoft Edge
-            // See MS Edge Issue #10396033
-            // Hence, the deliberate 'false'
-            // This is here just for completeness
-            // Remove the 'false' at your own risk
-            window.navigator.msSaveBlob(blob, filename);
-
-        } else if (window.Blob && window.URL) {
-            // HTML5 Blob
-            var blob = new Blob([universalBOM + csv], {
-                type: 'text/csv;charset=utf-8'
-            });
-            var csvUrl = URL.createObjectURL(blob);
-
-            $(this)
-                .attr({
-                    'download': filename,
-                    'href': csvUrl
-                });
-        } else {
-            // Data URI
-            var csvData = 'data:application/csv;charset=utf-8' + encodeURIComponent(universalBOM + csv);
-
-            $(this)
-                .attr({
-                    'download': filename,
-                    'href': csvData,
-                    'target': '_blank'
-                });
-        }
-    }
-
     $('#download_res').click(function(e){
-       // var result_0_order = JSON.parse($("#saved_res_0_order").attr("data-res"));
-       // var result_1_order = JSON.parse($("#saved_res_1_order").attr("data-res"));
-       // var args = [$('#dvData>table'), 'export.csv'];
-       // exportTableToCSV.apply(this, args);
         $("#table2excel").table2excel({
             // exclude CSS class
             exclude: ".noExl",
@@ -222,11 +164,15 @@ function save_table_to_Html(result_0_order, result_1_order) {
     $( "#dvData" ).append(table_str);
 }
 function show_graphs(results) {
+    var eps0 = getEps0();
+    if (!eps0) {
+        return;
+    }
     var result_0_order = parse_result_0_order(results.data);
     var result_1_order = parse_result_1_order(results.data);
     show_graph_0_order(result_0_order);
     show_graph_1_order(result_1_order);
-    save_result_to_html(result_0_order, result_1_order);
+    save_result_to_html(result_0_order, result_1_order, eps0);
     save_table_to_Html(result_0_order, result_1_order);
 }
 
@@ -298,15 +244,15 @@ function show_graph_1_order(results) {
     // console.log(data[1].length);
 }
 
-function check_criterion_1_order(f_with_star, f){
-    var eps2 = 1;
-    if (Math.abs((f_with_star - f)) <= eps2) {
-        return true;
-    } else {
-        console.log(false);
-        return false;
-    }
-}
+// function check_criterion_1_order(f_with_star, f){
+//     var eps2 = 1;
+//     if (Math.abs((f_with_star - f)) <= eps2) {
+//         return true;
+//     } else {
+//         console.log(false);
+//         return false;
+//     }
+// }
 
 function excecute_A0(A1, arr_1) {
     return arr_1[1] - A1 * arr_1[0];
@@ -347,7 +293,7 @@ function parse_result_1_order(data) {
 
 
         f_temp_2 = cells2[1];
-        if (!check_criterion_1_order(temp_f_with_star, f_temp_2)) {
+        if (!check_criterion_with_del(temp_f_with_star, f_temp_2)) {
             // console.log(f_with_star, f_temp_2);
             temp_A1 = excecute_A1(cells1, cells2);
             temp_A0 = excecute_A0(temp_A1, cells1);

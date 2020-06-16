@@ -97,7 +97,10 @@ function isNumber(n) {
 
 $(document).ready(function () {
     $('#submit-normal-seq').on("click",function(e){
-
+        var eps0 = getEps0();
+        if (!eps0) {
+            return;
+        }
         var mat =  $('#mat').val().replace(/,/, '.');
         var sigma =  $('#sigma').val().replace(/,/, '.');
         var amount =  $('#amount').val();
@@ -136,7 +139,7 @@ $(document).ready(function () {
         // create_one_comp_alg(mat, sigma, amount,normal_array);
         show_graph_1_order(result_1_order);
 
-        save_result_to_html(result_0_order, result_1_order);
+        save_result_to_html(result_0_order, result_1_order, eps0);
         save_table_to_Html(result_0_order, result_1_order);
     });
 });
@@ -210,8 +213,13 @@ function create_0_order_alg(normal_array, sigma) {
 }
 
 function check_criterion_with_del(f_with_star, f){
-    var eps = 1;
-    if (Math.abs((f_with_star - f)/f) <= eps) {
+    // var eps0 = Number($("#saved_res_eps0").attr("data-res"));
+    var eps0 = Number($("#eps0").val());
+
+    if (isNaN(eps0)) {
+        eps0 = 0.5;
+    }
+    if (Math.abs((f_with_star - f)/f) <= eps0) {
         return true;
     } else {
         // console.log(false);
