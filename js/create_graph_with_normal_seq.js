@@ -213,9 +213,7 @@ function create_0_order_alg(normal_array, sigma) {
 }
 
 function check_criterion_with_del(f_with_star, f){
-    // var eps0 = Number($("#saved_res_eps0").attr("data-res"));
     var eps0 = Number($("#eps0").val());
-
     if (isNaN(eps0)) {
         eps0 = 0.5;
     }

@@ -51,7 +51,6 @@ function save_result_to_html(result_0_order, result_1_order, eps0) {
     $('#download_res').prop('disabled', false);
     $("#saved_res_0_order").attr("data-res", JSON.stringify(result_0_order));
     $("#saved_res_1_order").attr("data-res", JSON.stringify(result_1_order));
-    // $("#saved_res_eps0").attr("data-res", eps0);
     $("#eps0").val(eps0);
 }
 
@@ -101,7 +100,6 @@ function formed_row_for_table(result) {
 }
 
 function formed_table_by_results(result_0_order, result_1_order) {
-    // var eps0 = Number($("#saved_res_eps0").attr("data-res"));
     var eps0 = Number($("#eps0").val());
     if (isNaN(eps0)) {
         eps0 = 0.5;
