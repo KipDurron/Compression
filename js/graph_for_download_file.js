@@ -51,7 +51,7 @@ function save_result_to_html(result_0_order, result_1_order, eps0) {
     $('#download_res').prop('disabled', false);
     $("#saved_res_0_order").attr("data-res", JSON.stringify(result_0_order));
     $("#saved_res_1_order").attr("data-res", JSON.stringify(result_1_order));
-    $("#eps0").val(eps0);
+    // $("#eps0").val(eps0);
 }
 
 function get_koef_compress(compressed_data, first_data) {
