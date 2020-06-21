@@ -44,9 +44,6 @@
                         <li><button class="btn btn-link collapsed nav-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                             <b> 2. Первого порядка с экстраполирующей аппроксимацией</b>
                         </button></li>
-                        <li><button class="btn btn-link collapsed nav-link" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            <b> 3. Первого порядка с интерполирующей аппроксимацией </b>
-                        </button></li>
                     </ul>
                 </nav>
             </div>
@@ -56,97 +53,20 @@
             <div class="card" style="margin-right: 30px">
                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
-                        <h5>Алгоритм нулевого порядка.</h5>
-                        <p>
-                            1. На вход блока сжатия в момент времени <img src="../recourse_image/t1.png"  alt="formula"> поступает отсчет <img src="../recourse_image/f1.png"  alt="formula">. Значения <img src="../recourse_image/t1.png"  alt="formula"> и <img src="../recourse_image/f1.png"  alt="formula"> запоминаются в буфере памяти и одновременно заносятся на носитель информации, предназначенный для хранения результатов сжатия. По данным первого отсчет строится аппроксимирующий полином нулевого порядка:
-                        </p>
-                        <p>
-                            <img src="../recourse_image/a0.png"  alt="formula">, где <img src="../recourse_image/a0_only.png"  alt="formula"> = <img src="../recourse_image/f1.png"  alt="formula">.
-                        </p>
-                        <p>
-                            2. На вход блока сжатия в момент времени <img src="../recourse_image/ti.png"  alt="formula"> поступает очередной отсчет <img src="../recourse_image/fi.png"  alt="formula">. По формуле точного критерия верности <img src="../recourse_image/e(t).png"  alt="formula"> или относительного точечного критерия верности <img src="../recourse_image/b(t).png"  alt="formula"> осуществляется расчет одного из точечных критериев <img src="../recourse_image/e(ti).png"  alt="formula"> или <img src="../recourse_image/b(ti).png"  alt="formula">. Далее проверяется выполнение требований <img src="../recourse_image/max.png"  alt="formula"> или    <img src="../recourse_image/maxb.png"  alt="formula">, наложенных на соответстующий критерий равномерного приближения. Если условие <img src="../recourse_image/max.png"  alt="formula"> или    <img src="../recourse_image/maxb.png"  alt="formula"> удовлетворяется, то повторяется выполнение п.2 для нового отсчета, в противном случае осуществляется переход к п.3.
-                        </p>
-                        <p>
-                            3. Значения <img src="../recourse_image/fi.png"  alt="formula"> и <img src="../recourse_image/ti.png"  alt="formula"> принимаются за новый существенный отсчет, запоминаются в буфере памяти и одновременно заносятся на носитель информации, предназначенный для хранения результатов сжатия. По данным i-го отсчета строится аппроксимирующий полином нулевого порядка:
-                        </p>
-                        <p>
-                            <img src="../recourse_image/f*Ai.png"  alt="formula">, где <img src="../recourse_image/A_i=f_i.png"  alt="formula">.
-                        </p>
-                        <p>
-                            Далее осуществляется переход к п. 2 настоящего алгоритма.
-                            Выполнение алгоритма заканчивается по окончании поступления данных на вход блока сжатия.
-                        </p>
+                        <object data="../resourse_pdf/lecture_1.pdf#zoom=120" type="application/pdf" style="min-height:100vh;width:100%">
+                        <embed src="../resourse_pdf/lecture_1.pdf" frameBorder="0"
+                               type="application/pdf">
+                        </object>
                     </div>
                 </div>
 
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                     <div class="card-body">
-                        <h5>Алгоритм первого порядка с экстраполирующей процедурой аппроксимации</h5>
-                        <p>
-                            1.На вход блока сжатия в момент времени <img src="../recourse_image/t1.png"  alt="formula">, поступает первый
-                            отсчет <img src="../recourse_image/f1.png"  alt="formula">. Значения <img src="../recourse_image/t1.png"  alt="formula">, и <img src="../recourse_image/f1.png"  alt="formula">, запоминаются в буфере памяти.
-                        </p>
-                        <p>
-                            2. На вход блока сжатия в момент времени <img src="../recourse_image/t2.png"  alt="formula"> поступает второй отсчёт <img src="../recourse_image/f1.png"  alt="formula"> . Значения <img src="../recourse_image/t2.png"  alt="formula"> и <img src="../recourse_image/f2.png"  alt="formula"> запоминаются в буфере памяти. По данным первого и второго отсчетов строится экстраполирующая прямая:
-
-                            <img src="../recourse_image/(f ) ̃(t) = A_0+A_1  *t .png"  alt="formula">,
-
-                            где коэффициент <img src="../recourse_image/a0_only.png"  alt="formula"> , <img src="../recourse_image/A1.png"  alt="formula">, рассчитываются по следующим формулам:
-
-                            <img src="../recourse_image/A_1=((f_2- f_1 ))((t_2- t_1 ) ).png"  alt="formula"> , <img src="../recourse_image/A_0=f_1- A_1*  t_1.png"  alt="formula">.
-                            Значения <img src="../recourse_image/a0_only.png"  alt="formula"> и <img src="../recourse_image/A1.png"  alt="formula"> , сохраняются в буфере памяти. После этого значения <img src="../recourse_image/a0_only.png"  alt="formula"> ,
-                            <img src="../recourse_image/A1.png"  alt="formula"> , <img src="../recourse_image/t1.png"  alt="formula"> заносятся на носитель информации, предназначенный для хранения результатов сжатия.
-                        </p>
-                        <p>
-                            3. На вход блока сжатия в момент времени <img src="../recourse_image/ti.png"  alt="formula"> поступает очередной отсчёт <img src="../recourse_image/fi.png"  alt="formula"> .По формуле (4.12) проводится расчет <img src="../recourse_image/(f ) ̃(t_i) .png"  alt="formula"> , а по формулам (4.6)
-                            или (4.9) осуществляется расчет одного из точечных критериев <img src="../recourse_image/e(ti).png"  alt="formula"> или <img src="../recourse_image/b(ti).png"  alt="formula">.
-                            Далее проверяется выполнение требований (4.11), наложенных на соответствующий критерий равномерного приближения. Если условие (4.11) удовлетворяется. то повторяется выполнение п. 3 для нового отсчета, в противном случае осуществляется переход к п. 4 .
-                        </p>
-                        <p>
-                            4. Значения <img src="../recourse_image/fi-1.png"  alt="formula"> , <img src="../recourse_image/ti-1.png"  alt="formula"> принимаются на новый существенный отсчет и запоминаются в буфере памяти. Далее по формуле (4.12) строится новая
-                            экстраполирующая прямая, а коэффициенты А0,А1 уже рассчитываются
-                            по-другому:
-
-                            <img src="../recourse_image/A_1=((f_i- f_(i-1) ))((t_i- t_(i-1) ) ).png"  alt="formula">, <img src="../recourse_image/A_0=f_(i-1)- A_1*  t_i.png"  alt="formula">.
-
-                            Значения <img src="../recourse_image/a0_only.png"  alt="formula"> и <img src="../recourse_image/A1.png"  alt="formula"> сохраняются в буфере памяти, после чего значения <img src="../recourse_image/a0_only.png"  alt="formula">, <img src="../recourse_image/A1.png"  alt="formula"> заносятся на носитель информации, предназначенный для хранения результатов сжатия. Далеу осуществляется переход к по 3 настоящего алгорИтма.
-
-                            Выполнение алгоритма заканчивается по окончании поступления данных
-                            на вход блока сжатия.</p>
+                        <object data="../resourse_pdf/lecture_2.pdf#zoom=120" type="application/pdf" style="min-height:100vh;width:100%">
+                            <embed src="../resourse_pdf/lecture_2.pdf" frameBorder="0"
+                                   type="application/pdf">
+                        </object>
                     </div>
-                </div>
-
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                    <div class="card-body">
-                        <h5>Алгоритм первого порядка с интерполирующей процедурой аппроксимации</h5>
-                        <p>
-                            1.На вход блока сжатия в момент времени <img src="../recourse_image/t1.png"  alt="formula"> поступает первый отсчет <img src="../recourse_image/f1.png"  alt="formula">.
-                            Значения <img src="../recourse_image/t1.png"  alt="formula"> и <img src="../recourse_image/f1.png"  alt="formula"> запоминаются в буфере памяти.
-                        </p>
-                        <p>
-                            2.На вход блока сжатия в момент времени <img src="../recourse_image/t2.png"  alt="formula"> поступает второй отсчет <img src="../recourse_image/f2.png"  alt="formula">.
-                            Значения <img src="../recourse_image/t2.png"  alt="formula"> и <img src="../recourse_image/f2.png"  alt="formula"> запоминаются в буфере памяти.
-                        </p>
-                        <p>
-                            3.На вход блока сжатия в момент времени <img src="../recourse_image/ti.png"  alt="formula"> поступает очередной отсчет <img src="../recourse_image/fi.png"  alt="formula">. Значения <img src="../recourse_image/ti.png"  alt="formula"> и <img src="../recourse_image/fi.png"  alt="formula"> запоминаются в буфете памяти.
-                            По точкам <img src="../recourse_image/t1.png"  alt="formula">,<img src="../recourse_image/f1.png"  alt="formula"> и <img src="../recourse_image/ti.png"  alt="formula">,<img src="../recourse_image/fi.png"  alt="formula"> строится интерполирующая прямая:
-                            <img src="../recourse_image/(f ) ̃(t) = A_0+A_1  *t .png"  alt="formula">,
-                            где коэффициенты <img src="../recourse_image/a0_only.png"  alt="formula">,<img src="../recourse_image/A1.png"  alt="formula"> рассчитываются по формулам:
-                            <img src="../recourse_image/A_1=((f_i- f_1 ))((t_i- t_1 ) ).png"  alt="formula"> ; <img src="../recourse_image/A_0=f_1- A_1*  t_1.png"  alt="formula">.
-                            Далее последовательно для всех отсчетов <img src="../recourse_image/t2.png"  alt="formula">,<img src="../recourse_image/f2.png"  alt="formula">;...;<img src="../recourse_image/ti-1.png"  alt="formula">,<img src="../recourse_image/fi-1.png"  alt="formula"> по формулам <img src="../recourse_image/e(t).png"  alt="formula"> или
-                            <img src="../recourse_image/gT ≤ ε_0.png"  alt="formula"> или <img src="../recourse_image/〖gT〗_отн  ≤ δ_0.png"  alt="formula"> (4.11) рассчитываются значенияточечных критериев <img src="../recourse_image/e(t)only.png"  alt="formula"> или <img src="../recourse_image/b(t)only.png"  alt="formula">.
-                            Если для всех указанных отсчетов выполняются условие (4.11), наложенное на соответствующий
-                            критерий равномерного приближения, выполнение п.3 повторяется для новых отсчетов. Если же хотя бы для одного отсчетов
-                            условие (4.11) не выполняется, то осуществеляется преход к п.4.
-                        </p>
-                        <p>
-                            4.Значение <img src="../recourse_image/fi-1.png"  alt="formula">,<img src="../recourse_image/ti-1.png"  alt="formula"> принимаеются за существенный отсчет и запоминются в буфете памяти. Значения коэффициентов <img src="../recourse_image/a0_only.png"  alt="formula">,<img src="../recourse_image/A1.png"  alt="formula">, подсчитанных
-                            в момент поступления этого отсчета, т.е. в предыдущий момент времени, вместе с величиной <img src="../recourse_image/t1.png"  alt="formula"> заносятся на носитель, предназначенный
-                            для хранения результатов сжатия. Примем (i-1)-й отсчет за первый и, повторяя все вышеприведенные рассуждения для вновь поступающих
-                            данных, осуществим переход к п.3.
-                            По окончанию поступления даннхы необходимо занести на итоговый носитель коэффициенты <img src="../recourse_image/a0_only.png"  alt="formula">,<img src="../recourse_image/A1.png"  alt="formula">, рассчитанные на основе последнего
-                            отсчета, и значение <img src="../recourse_image/t1.png"  alt="formula"> - время поступления последнего существенного отсчета.
-                        </p></div>
                 </div>
             </div>
         </div>
